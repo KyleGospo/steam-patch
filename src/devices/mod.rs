@@ -1,12 +1,13 @@
 pub mod device_ally;
 pub mod device_generic;
 pub mod device_go;
-
+pub mod device_desktop;
 
 use crate::{patch::Patch, server::SettingsRequest};
 use device_ally::DeviceAlly;
 use device_go::DeviceGo;
 use device_generic::DeviceGeneric;
+use device_desktop::DeviceDesktop;
 use regex::Regex;
 use std::fs;
 
@@ -31,12 +32,49 @@ pub fn create_device() -> Option<Box<dyn Device>> {
                 "AMD Ryzen Z1 Extreme ASUSTeK COMPUTER INC. RC71L" => {
                     Some(Box::new(DeviceAlly::new(conf.max_tdp, conf.max_gpu)))
                 }
-                // Asus Rog Ally
+
+                // Lenovo Legion Go
                 "AMD Ryzen Z1 Extreme LENOVO LNVNB161216" => {
                     Some(Box::new(DeviceGo::new(conf.max_tdp, conf.max_gpu)))
                 }
+
+                // Ayaneo 2
+                "AMD Ryzen 7 6800U with Radeon Graphics AYANEO AYANEO 2" => {
+                    Some(Box::new(DeviceGeneric::new(conf.max_tdp, 800, conf.max_gpu)))
+                }
+
+                // Ayaneo Geek
+                "AMD Ryzen 7 6800U with Radeon Graphics AYANEO GEEK" => {
+                    Some(Box::new(DeviceGeneric::new(conf.max_tdp, 800, conf.max_gpu)))
+                }
+
+                // Ayaneo 2S
+                "AMD Ryzen 7 7840U w/ Radeon 780M Graphics AYANEO AYANEO 2S" => {
+                    Some(Box::new(DeviceGeneric::new(conf.max_tdp, 800, conf.max_gpu)))
+                }
+
+                // Ayaneo Geek 1S
+                "AMD Ryzen 7 7840U w/ Radeon 780M Graphics AYANEO GEEK 1S" => {
+                    Some(Box::new(DeviceGeneric::new(conf.max_tdp, 800, conf.max_gpu)))
+                }
+
+                // GPD Win 4
+                "AMD Ryzen 7 6800U with Radeon Graphics GPD G1618-04" => {
+                    Some(Box::new(DeviceGeneric::new(conf.max_tdp, 800, conf.max_gpu)))
+                }
+
+                // GPD WM2
+                "AMD Ryzen 7 6800U with Radeon Graphics GPD G1619-04" => {
+                    Some(Box::new(DeviceGeneric::new(conf.max_tdp, 800, conf.max_gpu)))
+                }
+
+                // AOKZOE A1
+                "AMD Ryzen 7 6800U with Radeon Graphics AOKZOE AOKZOE A1 AR07" => {
+                    Some(Box::new(DeviceGeneric::new(conf.max_tdp, 800, conf.max_gpu)))
+                }
+
                 // Any other device
-                _ => Some(Box::new(DeviceGeneric::new(conf.max_tdp,800, conf.max_gpu))),
+                _ => Some(Box::new(DeviceDesktop::new())),
             }
         }
         None => None,
