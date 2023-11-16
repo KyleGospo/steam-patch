@@ -27,7 +27,7 @@ pub struct Config {
 // Default functions for each field
 fn default_main_enabled() -> bool { true }
 fn default_tdp_control() -> bool { true }
-fn default_gpu_control() -> bool { true }
+fn default_gpu_control() -> bool { false }
 fn default_max_tdp() -> i8 { 15 }
 fn default_max_gpu() -> i16 { 2000 }
 fn default_mapper() -> bool { false }
@@ -57,7 +57,7 @@ pub fn initialize_config() -> Config {
             let default_config = Config {
                 main_enabled: true, // Default values
                 tdp_control: true,
-                gpu_control: true,
+                gpu_control: false,
                 max_tdp: 15,
                 max_gpu: 2000,
                 mapper: false,
