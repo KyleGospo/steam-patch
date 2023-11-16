@@ -1,0 +1,19 @@
+[Unit]
+Description=Steam Patch Loader for user %i
+Wants=network.target
+After=network.target
+ConditionPathIsDirectory=/var/home/%i/.local/share/Steam
+
+[Service]
+Type=simple
+Restart=on-failure
+User=root
+Nice=-15
+IOSchedulingClass=best-effort
+IOSchedulingPriority=0
+RestartSec=5s
+ExecStartPre=touch "/var/home/%i/.local/share/Steam/.cef-enable-remote-debugging"
+ExecStart=/usr/bin/steam-patch --user=%i
+
+[Install]
+WantedBy=multi-user.target
